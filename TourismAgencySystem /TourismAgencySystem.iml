@@ -8,5 +8,12 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="postgresql-42.7.3" level="project" />
+    <orderEntry type="library" name="postgresql-42.7.31" level="project" />
+    <orderEntry type="library" name="flatlaf-3.2.5" level="project" />
+    <orderEntry type="library" name="flatlaf-extras-3.2.5" level="project" />
+    <orderEntry type="library" name="miglayout-swing" level="project" />
+    <orderEntry type="library" name="miglayout-core" level="project" />
+    <orderEntry type="library" name="jsvg-1.2.0" level="project" />
+    <orderEntry type="library" name="flatlaf-fonts-roboto-2.137" level="project" />
   </component>
 </module>

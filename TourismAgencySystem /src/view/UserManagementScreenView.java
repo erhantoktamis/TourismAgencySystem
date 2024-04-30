@@ -3,6 +3,7 @@ package view;
 import business.UserManagementBusinessController;
 import entity.UserModel;
 import entity.UserTitle;
+import view.HotelManagementScreens.AddEditUserScreenView;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -23,22 +24,12 @@ public class UserManagementScreenView extends JFrame {
     private DefaultTableModel mdlTableUser;
     private ArrayList<UserModel> userModels;
     private UserModel controllerActiveUser;
-    private UserTitle comboBoxSelectedTitle = UserTitle.Admin;
     private Integer tableSelectedItemIndex = -1;
 
     public UserManagementScreenView(UserModel activeUser) throws HeadlessException {
         setUIAttributes();
         controllerActiveUser = activeUser;
 
-        searchButton1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(comboBoxSelectedTitle != null) {
-                    userModels = UserManagementBusinessController.instance.getUsersBySelectedTitle(comboBoxSelectedTitle);
-                    updateTableInData(userModels);
-                }
-            }
-        });
         listAllButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -49,7 +40,11 @@ public class UserManagementScreenView extends JFrame {
         titleComboBox.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
-                comboBoxSelectedTitle = e.getItem().toString() == "Admin" ? UserTitle.Admin : UserTitle.Employee;
+                UserTitle comboBoxSelectedTitle = e.getItem().toString() == "Admin" ? UserTitle.Admin : UserTitle.Employee;
+                if(comboBoxSelectedTitle != null) {
+                    userModels = UserManagementBusinessController.instance.getUsersBySelectedTitle(comboBoxSelectedTitle);
+                    updateTableInData(userModels);
+                }
             }
         });
         backButton.addActionListener(new ActionListener() {
@@ -72,10 +67,23 @@ public class UserManagementScreenView extends JFrame {
                 }
             }
         });
+
         addNewEmployeeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 new AddEditUserScreenView().setVisible(true);
+            }
+        });
+
+        editEmployeeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                tableSelectedItemIndex = table1.getSelectedRow();
+
+                if(tableSelectedItemIndex != -1) {
+                    new AddEditUserScreenView(userModels.get(tableSelectedItemIndex)).setVisible(true);
+                }
             }
         });
     }

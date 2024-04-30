@@ -2,6 +2,8 @@ package view;
 
 import entity.UserModel;
 import entity.UserTitle;
+import view.HotelManagementScreens.HotelManagementScreenView;
+import view.ReservationManagementScreens.ReservationManagementScreenView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -32,13 +34,15 @@ public class DashboardScreenView extends JFrame {
         HotelManagementButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                dispose();
+                new HotelManagementScreenView(userModel).setVisible(true);
             }
         });
         ReservationManagementButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                dispose();
+                new ReservationManagementScreenView(userModel).setVisible(true);
             }
         });
         logoutButton.addActionListener(new ActionListener() {

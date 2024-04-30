@@ -20,7 +20,7 @@ public class LoginUserBusinessController {
                 || name.trim() == ""
                 || password.isBlank()
                 || password.trim() == "" ) {
-            ShowAlertController.instance.showAlertWithText( "Boş Giriş Yaptınız.");
+            ShowAlertController.instance.showAlertWithText( "Empty Value.");
         } else {
             try {
 
@@ -42,10 +42,10 @@ public class LoginUserBusinessController {
                return true;
            }
            case PasswordFailed -> {
-               ShowAlertController.instance.showAlertWithText("Girdiğiniz şifre hatalı ile eşleşen kullanıcı bulunamadı!");
+               ShowAlertController.instance.showAlertWithText("Your password is incorrect or Not Match with Username!");
            }
            case AllFailed -> {
-               ShowAlertController.instance.showAlertWithText("Giridiğiniz kullanıcı bulunamadı.!");
+               ShowAlertController.instance.showAlertWithText("User Not Found!");
            }
        }
         return false;

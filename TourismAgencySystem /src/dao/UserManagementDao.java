@@ -73,8 +73,7 @@ public class UserManagementDao {
             PreparedStatement preparedStatementUsername = this.connection.prepareStatement(queryUsername);
             preparedStatementUsername.setInt(1,userModel.getUserid());
 
-            ResultSet resultSetuserName = preparedStatementUsername.executeQuery();
-            while(resultSetuserName.next()) {
+            if(preparedStatementUsername.executeUpdate()>0) {
                 return true;
             }
 
@@ -94,6 +93,28 @@ public class UserManagementDao {
             preparedStatementUsername.setString(1,userModel.getUsername());
             preparedStatementUsername.setString(2,userModel.getUserPassword());
             preparedStatementUsername.setString(3,userModel.getUserTitle().toString());
+
+            if(preparedStatementUsername.executeUpdate()>0) {
+                return true;
+            }
+
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
+        return false;
+    }
+
+    public Boolean updateUser(UserModel userModel) {
+        ArrayList<UserModel> model = new ArrayList<UserModel>();
+
+        String queryUsername = "Update public.user SET user_name=?, user_password=?, user_title=? Where user_id=?";
+        try{
+            PreparedStatement preparedStatementUsername = this.connection.prepareStatement(queryUsername);
+            preparedStatementUsername.setString(1,userModel.getUsername());
+            preparedStatementUsername.setString(2,userModel.getUserPassword());
+            preparedStatementUsername.setString(3,userModel.getUserTitle().toString());
+            preparedStatementUsername.setInt(4,userModel.getUserid());
 
             if(preparedStatementUsername.executeUpdate()>0) {
                 return true;
